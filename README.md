@@ -3,7 +3,7 @@ React Google Calendar is an implementation of [react-big-calendar](https://githu
 that pulls events from multiple Google calendars and reformats them for display.
 It also allows for many kinds of reoccuring events, such as daily, weekly, and monthly.
 
-[Demo && Dox](https://crashspringfield.github.io/react-big-calendar)
+[Demo && Dox](https://crashspringfield.github.io/react-google-calendar/)
 
 ## Running locally
 
