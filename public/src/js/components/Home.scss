@@ -1,0 +1,16 @@
+:local {
+  .title {
+    text-align: center;
+    font-size: 24px;
+    margin: 20px;
+  }
+  .calendar-container {
+    padding: 20px;
+    height: 90vh;
+  }
+}
+:global {
+  body {
+    background-color: #eaeaea;
+  }
+}
