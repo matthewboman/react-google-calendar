@@ -27,7 +27,7 @@ const handleDayOfMonth = (calendar, recurrence, e) => {
 
   while (recurrence > 0) {
     let tempCounter = counter
-    // Using 'recurrence' and 'tempCounter' doesn't work with Moment
+    // Using variables 'recurrence' and 'tempCounter' doesn't work with Moment
     let nextStart = new Date(start.year(), start.month() + recurrence, tempCounter, start.hour(), start.minutes())
     let nextEnd = new Date(end.year(), end.month() + recurrence, tempCounter, end.hour(), end.minutes())
 

@@ -8,6 +8,7 @@ import moment from 'moment'
 const handleDaily = (calendar, recurrence, e) => {
   const start = moment(e.start.dateTime)
   const end = moment(e.end.dateTime)
+  // reformat reponse to get how many days between each recurrence
   const wtfGoogle = (e.recurrence[0].split(";").pop().split("=").pop() != "DAILY")
     ? parseInt(e.recurrence[0].split(";").pop().split("=").pop())
     : 1

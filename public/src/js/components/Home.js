@@ -4,22 +4,23 @@ import moment from 'moment'
 
 import { GOOGLE_API_KEY } from '../config.js'
 import GoogleCalendar from '../utils/GoogleCalendar'
-
 import Docs from './Docs'
 
 import 'react-big-calendar/lib/css/react-big-calendar.css'
 import styles from './Home.scss'
 
+// use Moment.js to localize react-big-calendar
 BigCalendar.momentLocalizer(moment)
+
 const calendars = [
   {
     name: 'demo',
     url: 'srg23q1tm95o05u36lec0ilkt4@group.calendar.google.com'
   }
 ]
-const dailyRecurrence = 100
-const weeklyRecurrence = 50
-const monthlyRecurrence = 10
+const dailyRecurrence = 700
+const weeklyRecurrence = 100
+const monthlyRecurrence = 20
 
 export default class Home extends Component {
   constructor(props) {

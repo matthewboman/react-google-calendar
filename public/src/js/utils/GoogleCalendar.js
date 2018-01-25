@@ -6,7 +6,13 @@ import { handleDaily, handleDateOfMonth, handleDayOfMonth, handleWeekly } from '
 
 export default {
 
-  getAllCalendars: (GOOGLE_API_KEY, calendars, dailyRecurrence, weeklyRecurrence, monthlyRecurrence) => Promise.map(calendars, (calendar) => {
+  getAllCalendars: (
+    GOOGLE_API_KEY,
+    calendars,
+    dailyRecurrence,
+    weeklyRecurrence,
+    monthlyRecurrence
+  ) => Promise.map(calendars, (calendar) => {
     return axios.get(`https://content.googleapis.com/calendar/v3/calendars/${calendar.url}/events?key=${GOOGLE_API_KEY}`)
       .then(res => {
         const items = res.data.items.filter(item => item.status != "cancelled")
