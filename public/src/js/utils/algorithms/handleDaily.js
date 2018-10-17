@@ -1,4 +1,4 @@
-import moment from 'moment'
+const moment = require('moment')
 
 /*
  * Handles events that occur every 'n' number of days
@@ -35,4 +35,4 @@ const handleDaily = (calendar, recurrence, e) => {
   return reoccurringEvents
 }
 
-export default handleDaily
+module.exports = handleDaily

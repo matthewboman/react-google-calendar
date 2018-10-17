@@ -1,4 +1,4 @@
-import moment from 'moment'
+const moment = require('moment')
 
 /*
  * Handles events that occure the same date of every month
@@ -30,4 +30,4 @@ import moment from 'moment'
    return reoccurringEvents
  }
 
-export default handleDateOfMonth
+module.exports = handleDateOfMonth

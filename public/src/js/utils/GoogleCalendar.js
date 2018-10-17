@@ -15,6 +15,7 @@ export default {
   ) => Promise.map(calendars, (calendar) => {
     return axios.get(`https://content.googleapis.com/calendar/v3/calendars/${calendar.url}/events?key=${GOOGLE_API_KEY}`)
       .then(res => {
+
         const items = res.data.items.filter(item => item.status != "cancelled")
         const oneTime = items.filter(item => !item.recurrence).map(e => {
           // account for all day events
@@ -36,6 +37,8 @@ export default {
             const r = event.recurrence[0].split(';')
             return { e: event, r }
           })
+
+        console.log(reoccurring)
 
         const daily = reoccurring.filter(item => item.r[0] == "RRULE:FREQ=DAILY")
           .map(item => item.e)

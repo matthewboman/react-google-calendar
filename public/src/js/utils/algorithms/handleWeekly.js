@@ -1,4 +1,4 @@
-import moment from 'moment'
+const moment = require('moment')
 
 /*
  * Handles events that occur the same day of every week
@@ -30,4 +30,4 @@ const handleWeekly = (calendar, recurrence, e) => {
   return reoccurringEvents
 }
 
-export default handleWeekly
+module.exports = handleWeekly

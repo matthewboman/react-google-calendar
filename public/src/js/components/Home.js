@@ -57,7 +57,10 @@ export default class Home extends Component {
      *        }
      */
     GoogleCalendar.getAllCalendars(GOOGLE_API_KEY, calendars, dailyRecurrence, weeklyRecurrence, monthlyRecurrence)
-      .then(events => this.setState({events}) )
+      .then(events =>{
+        // console.log(events)
+        this.setState({events})
+    })
       .catch(err => { throw new Error(err) })
   }
 

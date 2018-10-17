@@ -4,7 +4,9 @@
   "description": "An implementation of react-big-calendar populated by linked Google calendars",
   "main": "index.js",
   "scripts": {
-    "start": "webpack-dev-server --inline --hot"
+    "start": "webpack-dev-server",
+    "build": "webpack",
+    "test": "jest"
   },
   "keywords": [
     "react",
@@ -33,6 +35,8 @@
     "babel-preset-react": "^6.11.1",
     "babel-preset-stage-2": "^6.13.0",
     "css-loader": "^0.28.11",
+    "html-webpack-plugin": "^3.2.0",
+    "jest": "^23.6.0",
     "node-sass": "^4.9.4",
     "postcss-loader": "^2.1.6",
     "sass-loader": "^6.0.7",
