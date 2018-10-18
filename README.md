@@ -8,8 +8,10 @@ It also allows for many kinds of reoccuring events, such as daily, weekly, and m
 ## Running locally
 
 * clone the repository `git clone https://github.com/crashspringfield/react-google-calendar.git`
-* update config.js with your API key
-* `npm install && npm start`
+* `config.js` has a demo API for tests. Update config.js with your API key to access your calendar.
+* Development build with hot reloading: `npm start`
+* Build for production: `npm run build`
+* Run tests: `npm test`
 
 ## Further setup
 

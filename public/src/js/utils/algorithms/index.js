@@ -1,9 +1,9 @@
-import handleDaily from './handleDaily'
-import handleDateOfMonth from './handleDateOfMonth'
-import handleDayOfMonth from './handleDayOfMonth'
-import handleWeekly from './handleWeekly'
+const handleDaily = require('./handleDaily')
+const handleDateOfMonth = require('./handleDateOfMonth')
+const handleDayOfMonth = require('./handleDayOfMonth')
+const handleWeekly = require('./handleWeekly')
 
-export {
+module.exports = {
 
   handleDaily,
   handleDateOfMonth,

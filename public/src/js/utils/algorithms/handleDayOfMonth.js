@@ -1,10 +1,11 @@
-import moment from 'moment'
+const moment = require('moment')
 
 /*
  * Handles events that occur the same day of the month
  * (e.g. first Friday, last Monday)
  */
 
+// handleDayOfMonth :: String -> Int -> {} -> [{}]
 const handleDayOfMonth = (calendar, recurrence, e) => {
   const start = moment(e.start.dateTime)
   const end = moment(e.end.dateTime)
@@ -60,4 +61,4 @@ const handleDayOfMonth = (calendar, recurrence, e) => {
   return reoccurringEvents
 }
 
-export default handleDayOfMonth
+module.exports = handleDayOfMonth

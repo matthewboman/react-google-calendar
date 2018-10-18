@@ -19,7 +19,7 @@ const calendars = [
   }
 ]
 const dailyRecurrence = 700
-const weeklyRecurrence = 100
+const weeklyRecurrence = 500
 const monthlyRecurrence = 20
 
 export default class Home extends Component {
@@ -36,6 +36,8 @@ export default class Home extends Component {
 
   getGoogleCalendarEvents = () => {
     /*
+     * @deprecated - This will be changed to take an Object in v2.0.0 in order to make parameters clearer
+     *
      * @param {string} GOOGLE_API_KEY - your Google API key
      * @param {array} calendars - a list of key, value pairs
      *                {name: 'name of your calendar', url: 'calendar_url'}
@@ -57,7 +59,9 @@ export default class Home extends Component {
      *        }
      */
     GoogleCalendar.getAllCalendars(GOOGLE_API_KEY, calendars, dailyRecurrence, weeklyRecurrence, monthlyRecurrence)
-      .then(events => this.setState({events}) )
+      .then(events =>{
+        this.setState({events})
+    })
       .catch(err => { throw new Error(err) })
   }
 

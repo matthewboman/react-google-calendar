@@ -1,5 +1,6 @@
-const path = require('path');
-const webpack = require('webpack');
+const path = require('path')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
+// const webpack = require('webpack')
 
 module.exports = {
   context: __dirname,
@@ -9,9 +10,9 @@ module.exports = {
   ],
   output: {
     path: path.join(__dirname, 'public', 'dist'),
-    filename: '[name].bundle.js',
-    publicPath: '/dist/',
-    sourceMapFilename: 'bundle.map'
+    filename: 'app.bundle.js',
+    // publicPath: '/dist/',
+    // sourceMapFilename: 'bundle.map'
   },
   devtool: '#source-map',
   module: {
@@ -60,13 +61,17 @@ module.exports = {
       },
     ]
   },
-  plugins: [ ],
+  plugins: [
+    new HtmlWebpackPlugin({
+      template: path.join('./', 'index.html'),
+    })
+  ],
   resolve: {
     modules: ['node_modules', 'src'],
       extensions: [".webpack.js", ".web.js", ".js", '.scss']
   },
   devServer: {
-    hot: true,
+    // hot: true,
     contentBase: '.'
   }
 };
