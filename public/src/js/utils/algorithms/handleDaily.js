@@ -5,6 +5,7 @@ const moment = require('moment')
  * (e.g. every day, every 5 days)
  */
 
+// handleDaily :: String -> Int -> {} -> [{}]
 const handleDaily = (calendar, recurrence, e) => {
   const start = moment(e.start.dateTime)
   const end = moment(e.end.dateTime)

@@ -5,6 +5,7 @@ const moment = require('moment')
  * (e.g. every Monday)
  */
 
+// handleWeekly :: String -> Int -> {} -> [{}]
 const handleWeekly = (calendar, recurrence, e) => {
   const start = moment(e.start.dateTime)
   const end = moment(e.end.dateTime)

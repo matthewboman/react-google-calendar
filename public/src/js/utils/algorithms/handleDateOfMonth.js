@@ -5,6 +5,7 @@ const moment = require('moment')
  * (e.g. the 1st, the 8th)
  */
 
+// handleDateOfMonth :: String -> Int -> {} -> [{}]
  const handleDateOfMonth = (calendar, recurrence, e) => {
    const start = moment(e.start.dateTime)
    const end = moment(e.end.dateTime)
