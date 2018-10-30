@@ -21,18 +21,11 @@ import {
 export default {
 
   /*
-   * @deprecated - This will be changed to take an Object in v2.0.0 in order to make parameters clearer
-   *
    * Get events from all calendars specified and created specified number of recurring events
    */
-  getAllCalendars: (
-    GOOGLE_API_KEY,
-    calendars,
-    dailyRecurrence,
-    weeklyRecurrence,
-    monthlyRecurrence
-  ) => Promise.map(calendars, (calendar) => {
-    return axios.get(`https://content.googleapis.com/calendar/v3/calendars/${calendar.url}/events?key=${GOOGLE_API_KEY}`)
+  getAllCalendars: (config) => Promise.map(config.calendars, (calendar) => {
+    // get each calendar
+    return axios.get(`https://content.googleapis.com/calendar/v3/calendars/${calendar.url}/events?key=${config.api_key}`)
       .then(res => {
         const items = res.data.items
         const events = removeCancelled(items)
@@ -44,7 +37,7 @@ export default {
           removeRecurrenceProperty(daily),
           handleDaily,
           calendar,
-          dailyRecurrence
+          config.dailyRecurrence
         ).flat()
 
         const weekly = filterByOneProperty("RRULE:FREQ=WEEKLY", recurringEvents)
@@ -52,7 +45,7 @@ export default {
           removeRecurrenceProperty(weekly),
           handleWeekly,
           calendar,
-          weeklyRecurrence
+          config.weeklyRecurrence
         ).flat()
 
         const monthly = filterByOneProperty("RRULE:FREQ=MONTHLY", recurringEvents)
@@ -68,13 +61,13 @@ export default {
           removeRecurrenceProperty(dateOfMonth),
           handleDateOfMonth,
           calendar,
-          monthlyRecurrence
+          config.monthlyRecurrence
         ).flat()
         const recurringDayOfMonth = recurringByProperty(
           removeRecurrenceProperty(dayOfMonth),
           handleDayOfMonth,
           calendar,
-          monthlyRecurrence
+          config.monthlyRecurrence
         ).flat()
 
         const allEvents = [].concat(
