@@ -3,13 +3,13 @@
     padding: 20px 40px;
 
     .section {
-      padding: 20px 0;
+      padding: 40px 12vw 80px 12vw;
       border-bottom: 1px solid #cbcbcb;
 
       .title {
         text-align: center;
         font-size: 24px;
-        margin-bottom: 20px;
+        margin-bottom: 40px;
       }
 
       .section-body {
@@ -24,14 +24,34 @@
 
     .link { }
 
-    .code {
-      background-color: #fff;
-      padding: 2px 4px;
-      border-radius: 4px;
-    }
   }
 
   li {
-    line-height: 24px;
+    line-height: 32px;
+  }
+
+  .code {
+    font-family: monospace;
+    background-color: #274a68;
+    color: #0dfb0d;
+    padding: 6px 8px;
+    border-radius: 4px;
+    -webkit-box-shadow: inset 0px 0px 15px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: inset 0px 0px 15px 0px rgba(0,0,0,0.75);
+    box-shadow: inset 0px 0px 15px 0px rgba(0,0,0,0.75);
+  }
+  .code-block {
+    font-family: monospace;
+    background-color: #274a68;
+    color: #0dfb0d;
+    white-space: pre-wrap;
+    max-width: 800px;
+    padding: 10px 20px;
+    margin: 12px auto;
+    border-radius: 4px;
+    -webkit-box-shadow: inset 0px 0px 15px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: inset 0px 0px 15px 0px rgba(0,0,0,0.75);
+    box-shadow: inset 0px 0px 15px 0px rgba(0,0,0,0.75);
+
   }
 }
