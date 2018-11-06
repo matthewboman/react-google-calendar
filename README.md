@@ -3,9 +3,42 @@ React Google Calendar is an implementation of [react-big-calendar](https://githu
 that pulls events from multiple Google calendars and reformats them for display.
 It also allows for many kinds of reoccuring events, such as daily, weekly, and monthly.
 
-[Demo && Doxx](https://crashspringfield.github.io/react-google-calendar/)
+[Demo && Docs](https://crashspringfield.github.io/react-google-calendar/)
 
-## Running locally
+## Getting Started
+
+    import Calendar from 'react_google_calendar'
+
+    const calendar_configuration = {
+        api_key: YOUR_GOOGLE_API_KEY,
+        calendars: [
+          {
+            name: 'demo', // whatever you want to name it
+            url: 'exampleURL@group.calendar.google.com' // your calendar URL
+          }
+        ],
+        dailyRecurrence: 700,
+        weeklyRecurrence: 500,
+        monthlyRecurrence: 20
+    }
+
+    export default class MyApp extends Component {
+        constructor(props) {
+          super(props)
+            this.state = {
+              events: []
+            }
+        }
+
+        render = () =>
+          <div>
+            <Calendar
+              events={this.state.events}
+              config={calendar_configuration} />
+          </div>
+    }
+
+## Local Development
 
 * clone the repository `git clone https://github.com/crashspringfield/react-google-calendar.git`
 * `config.js` has a demo API for tests. Update config.js with your API key to access your calendar.

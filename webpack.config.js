@@ -1,18 +1,15 @@
 const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 // const webpack = require('webpack')
+const APP_DIR = path.resolve(__dirname, 'src/app/js')
+const BUILD_DIR = path.resolve(__dirname, 'src/public')
 
 module.exports = {
   context: __dirname,
-  entry: [
-    'babel-polyfill',
-    './public/src/js/index.js'
-  ],
+  entry: APP_DIR + '/index.js',
   output: {
-    path: path.join(__dirname, 'public', 'dist'),
+    path: BUILD_DIR,
     filename: 'app.bundle.js',
-    // publicPath: '/dist/',
-    // sourceMapFilename: 'bundle.map'
   },
   devtool: '#source-map',
   module: {
@@ -20,6 +17,7 @@ module.exports = {
       {
         test: /\.js$/,
         exclude: [/(node_modules|bower_components)/],
+        include: APP_DIR,
         use: [{
           loader: 'babel-loader',
           options: { presets: ['es2015', 'stage-2', 'react'] }
@@ -72,6 +70,6 @@ module.exports = {
   },
   devServer: {
     // hot: true,
-    contentBase: '.'
+    contentBase: 'src/public'
   }
 };

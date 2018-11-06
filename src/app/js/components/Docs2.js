@@ -2,10 +2,10 @@ import React, { Component } from 'react'
 
 import styles from './Docs.scss'
 
-export default class Docs extends Component {
+export default class Docs2 extends Component {
 
   render = () =>
-    <div className={styles['docs-container']}>
+    <div id="docs" className={styles['docs-container']}>
 
       <div className={styles['section']}>
         <div className={styles['title']}>About</div>
@@ -17,10 +17,46 @@ export default class Docs extends Component {
       <div className={styles['section']}>
         <div className={styles['title']}>Getting started</div>
         <div className={styles['section-body']}>
+          <p>This simplest way to use React Google Calendar is to import it and render it with the necessary props making sure to set your API key and the URLs of any calendar you would like to use.</p>
+          <div className={styles['code-block']}>
+          {`
+import Calendar from 'react_google_calendar'
+
+const calendar_configuration = {
+    api_key: YOUR_GOOGLE_API_KEY,
+    calendars: [
+      {
+        name: 'demo',
+        url: 'exampleURL@group.calendar.google.com'
+      }
+    ],
+    dailyRecurrence: 700,
+    weeklyRecurrence: 500,
+    monthlyRecurrence: 20
+}
+
+export default class MyApp extends Component {
+    constructor(props) {
+      super(props)
+        this.state = {
+          events: []
+        }
+    }
+
+    render = () =>
+      <div>
+        <Calendar
+          events={this.state.events}
+          config={calendar_configuration} />
+      </div>
+}
+          `}
+          </div>
+          <p>Alternatively, you can build directly from the project:</p>
           <ul>
-            <li>Clone the git repository: <span className={styles['code']}>git clone https://github.com/crashspringfield/react-google-calendar.git </span></li>
-            <li>Add your API key <span className={styles['code']}>./public/src/js/config.js</span></li>
-            <li><span className={styles['code']}>npm install && npm start</span></li>
+            <li>Clone or fork the git repository: <span className={styles['code']}>git clone https://github.com/crashspringfield/react-google-calendar.git </span></li>
+            <li>Add your API key and calendar URL to the `calendar_configuration` object in <span className={styles['code']}>./src/app/js/config.js</span></li>
+            <li>Start the site: <span className={styles['code']}>npm install && npm start</span></li>
           </ul>
           <p>Check out the <a href="https://docs.simplecalendar.io/google-api-key/" target="_blank">Simple Calendar documentation</a> for a great guide to getting an API key</p>
         </div>
@@ -29,23 +65,12 @@ export default class Docs extends Component {
       <div className={styles['section']}>
         <div className={styles['title']}>How it works</div>
         <div className={styles['section-body']}>
-          By implementing various algorithms to duplicate reoccuring events, the function <span className={styles['code']}>GoogleCalendar.getAllCalendars()</span> returns a promise of a list of the events taken from the Google Calendar.
-          It takes five parameters:
-          <ul>
-            <li>Your API key: <span className={styles['code']}>GOOGLE_API_KEY</span></li>
-            <li>A list of calendar objects: <span className={styles['code']}>[ {'{'}name: 'whatever name you want', url: 'calendarURL'{'}'} ]</span>*</li>
-            <li>How many of each reoccuring-daily events you want: <span className={styles['code']}>dailyRecurrence</span>**</li>
-            <li>How many of each reoccuring-weekly events you want: <span className={styles['code']}>weeklyRecurrence</span>**</li>
-            <li>How many of each reoccuring-monthly events you want: <span className={styles['code']}>monthlyRecurrence</span>**</li>
-          </ul>
+          By implementing various algorithms to duplicate reoccuring events, the function <span className={styles['code']}>googleAPI.getAllCalendars()</span> returns a promise of a list of the events taken from the Google calendars.
           <p>
-            * You can get your calendarURL by going to <a href="https://calendar.google.com/calendar" target="_blank">https://calendar.google.com/calendar</a>, selecting
+            You can get your calendarURL by going to <a href="https://calendar.google.com/calendar" target="_blank">https://calendar.google.com/calendar</a>, selecting
               your calendar and clicking <b>'Share this calendar'</b>. Next. click <b>'Make this calendar public'</b>.
             At the top, select <b>'Calendar Details'</b>, scroll down to <b>'Calendar Address'</b>, and get the Calendar ID
             (e.g. the one used for the demo looks like <i>'srg23q1tm95o05u36lec0ilkt4@group.calendar.google.com'</i>).
-          </p>
-          <p>
-          ** These last three are to keep you from getting back too many events, or to allow you go get events far into the future of when they were created.
           </p>
         </div>
       </div>
