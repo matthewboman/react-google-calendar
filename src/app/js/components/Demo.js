@@ -23,9 +23,23 @@ export default class Demo extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      events: []
+      events: [],
+      version: 2
     }
   }
+
+  renderDocs = () => this.state.version === 2
+    ? (
+      <div>
+        <p className={styles["version"]}>For version 1 documentation, <a href="#docs" onClick={this.state.version = 1}>click here</a></p>
+        <Docs2 />
+      </div>
+    ) : (
+      <div>
+        <p className={styles["version"]}>For version 2 documentation, <a href="#docs" onClick={this.state.version = 2}>click here</a></p>
+        <Docs1 />
+      </div>
+    )
 
   render = () =>
     <div>
@@ -36,6 +50,6 @@ export default class Demo extends Component {
           config={calendar_configuration}
         />
       </div>
-      <Docs2 />
+      { this.renderDocs() }
     </div>
 }

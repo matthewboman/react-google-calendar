@@ -5,7 +5,7 @@ import styles from './Docs.scss'
 export default class Docs2 extends Component {
 
   render = () =>
-    <div className={styles['docs-container']}>
+    <div id="docs" className={styles['docs-container']}>
 
       <div className={styles['section']}>
         <div className={styles['title']}>About</div>
