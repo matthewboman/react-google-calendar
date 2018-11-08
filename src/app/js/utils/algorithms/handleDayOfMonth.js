@@ -7,11 +7,17 @@ const moment = require('moment')
 
 // handleDayOfMonth :: String -> Int -> {} -> [{}]
 const handleDayOfMonth = (calendar, recurrence, e) => {
-  const start = moment(e.start.dateTime)
-  const end = moment(e.end.dateTime)
+  const start = e.start.date
+    ? moment(e.start.date)
+    : moment(e.start.dateTime)
+  const end = e.end.date
+    ? moment(e.start.date)
+    : moment(e.end.dateTime)
+
   const day = start.day()
   const date = start.date()
   let counter
+  
   if (date <= 7) {
     counter = 1
   } else if ((date >7) && (date <= 14)) {
