@@ -7,8 +7,13 @@ const moment = require('moment')
 
 // handleDateOfMonth :: String -> Int -> {} -> [{}]
  const handleDateOfMonth = (calendar, recurrence, e) => {
-   const start = moment(e.start.dateTime)
-   const end = moment(e.end.dateTime)
+   const start = e.start.date
+     ? moment(e.start.date)
+     : moment(e.start.dateTime)
+   const end = e.end.date
+     ? moment(e.start.date)
+     : moment(e.end.dateTime)
+     
    let reoccurringEvents = []
    let add = 1
 
