@@ -28,15 +28,20 @@ export default class Demo extends Component {
     }
   }
 
+  toggleVersion = () => {
+    const version = this.state.version === 2 ? 1 : 2
+    this.setState({ version })
+  }
+
   renderDocs = () => this.state.version === 2
     ? (
       <div>
-        <p className={styles["version"]}>For version 1 documentation, <a href="#docs" onClick={this.state.version = 1}>click here</a></p>
+        <p className={styles["version"]}>This documentation is for 2.0.0 or later. For version 1 documentation, <a href="#docs" onClick={this.toggleVersion}>click here</a></p>
         <Docs2 />
       </div>
     ) : (
       <div>
-        <p className={styles["version"]}>For version 2 documentation, <a href="#docs" onClick={this.state.version = 2}>click here</a></p>
+        <p className={styles["version"]}>This documentation is for 1.1.3 or earlier. For version 2 documentation, <a href="#docs" onClick={this.toggleVersion}>click here</a></p>
         <Docs1 />
       </div>
     )
