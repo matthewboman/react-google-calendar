@@ -1,6 +1,6 @@
 {
   "name": "react_google_calendar",
-  "version": "2.1.0",
+  "version": "2.2.0",
   "description": "An implementation of react-big-calendar populated by linked Google calendars",
   "main": "index.js",
   "scripts": {
