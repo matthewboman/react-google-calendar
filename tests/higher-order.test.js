@@ -1,5 +1,5 @@
-const response = require('../dummy_data/response')
-const fns = require('../public/src/js/utils/functions')
+const response = require('./dummy_data/response')
+const fns = require('./src/utils/functions')
 
 it("Returns only recurring events", () => {
   expect(

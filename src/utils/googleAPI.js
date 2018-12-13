@@ -1,4 +1,3 @@
-import axios from 'axios'
 import * as Promise from 'bluebird'
 import moment from 'moment'
 
@@ -33,9 +32,10 @@ export default {
    */
   getAllCalendars: (config) => Promise.map(config.calendars, (calendar) => {
     // get each calendar
-    return axios.get(`https://content.googleapis.com/calendar/v3/calendars/${calendar.url}/events?key=${config.api_key}`)
+    return fetch(`https://content.googleapis.com/calendar/v3/calendars/${calendar.url}/events?key=${config.api_key}`)
+      .then(res => res.json())
       .then(res => {
-        const items = res.data.items
+        const items = res.items
         const events = removeCancelled(items)
         const oneTimeEvents = oneTime(calendar, events)
         const recurringEvents = recurring(events)
@@ -85,7 +85,7 @@ export default {
           recurringDateOfMonth,
           recurringDayOfMonth
         )
-        return allEvents
+        return allEvents.flat()
       })
   })
   .then(allEvents => [].concat.apply([], allEvents))

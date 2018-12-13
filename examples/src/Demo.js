@@ -1,13 +1,12 @@
 import React, { Component } from 'react'
 
-import { GOOGLE_API_KEY } from '../config.js'
-import Calendar from './Calendar'
+import Calendar from '../../src/index.js'
 import Docs1 from './Docs1'
 import Docs2 from './Docs2'
 import styles from './Demo.scss'
 
 const calendar_configuration = {
-  api_key: GOOGLE_API_KEY,
+  api_key: 'AIzaSyA13TZidErRpYRuet8rqXPRdxEX_dcM9gU',
   calendars: [
     {
       name: 'demo',

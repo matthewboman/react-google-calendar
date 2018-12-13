@@ -1,7 +1,7 @@
 const flat = require('array.prototype.flat')
-const algorithms = require('../public/src/js/utils/algorithms')
-const fns = require('../public/src/js/utils/functions')
-const response = require('../dummy_data/response')
+const algorithms = require('./src/utils/functions')
+const response = require('./dummy_data/response')
+const fns = require('./src/utils/functions')
 
 // these assumptions are verified in `higher-order.test.js`
 const daily = fns.filterByOneProperty("RRULE:FREQ=DAILY", fns.recurring(response))

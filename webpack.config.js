@@ -1,30 +1,34 @@
 const path = require('path')
-const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
-const merge = require("webpack-merge")
+const htmlWebpackPlugin = new HtmlWebpackPlugin({
+  template: path.join(__dirname, "examples/src/index.html"),
+  filename: "./index.html"
+})
 
-const APP_DIR = path.resolve(__dirname, 'src/app/js')
-const BUILD_DIR = path.resolve(__dirname, 'src/public')
-
-module.exports = env => {
-  const { PLATFORM, VERSION } = env
-
-  return merge([
-    {
-      entry: [
-        '@babel/polyfill', APP_DIR
-      ],
-
-      module: {
-        rules: [
+module.exports = {
+  entry: path.join(__dirname, "examples/src/index.js"),
+  output: {
+    path: path.join(__dirname, "examples/dist"),
+    filename: "bundle.js"
+  },
+  module: {
+    rules: [
+      {
+        test: /\.(js|jsx)$/,
+        exclude: /node_modules/,
+        use: {
+          loader: "babel-loader"
+        }
+      },
+      {
+        test: /\.html$/,
+        use: [
           {
-            test: /\.js$/,
-            exclude: /node_modules/,
-            use: {
-              loader: 'babel-loader'
-            }
-          },
-          {
+            loader: "html-loader"
+          }
+        ]
+      },
+      {
             test: /\.css$/,
             use: [
               'style-loader',
@@ -57,21 +61,11 @@ module.exports = env => {
               },
               { loader: 'sass-loader' }
             ]
-          },
-
-        ]
-      },
-
-      plugins: [
-        new HtmlWebpackPlugin({
-          template: path.join('./', 'index.html'),
-          filename: './index.html'
-        }),
-        new webpack.DefinePlugin({
-          'process.env.VERSION': JSON.stringify(env.VERSION),
-          'process.env.PLATFORM': JSON.stringify(env.PLATFORM)
-        }),
-      ],
-    }
-  ])
-}
+        },
+    ]
+  },
+  plugins: [htmlWebpackPlugin],
+  resolve: {
+    extensions: [".js", ".jsx"]
+  }
+};

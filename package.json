@@ -1,12 +1,16 @@
 {
   "name": "react_google_calendar",
-  "version": "2.2.1",
+  "version": "2.2.2",
   "description": "An implementation of react-big-calendar populated by linked Google calendars",
-  "main": "index.js",
+  "main": "dist/index.js",
   "scripts": {
-    "start": "webpack-dev-server --mode development --config webpack.base.config.js --open --hot --history-api-fallback --env.PLATFORM=local --env.VERSION=stag",
-    "build": "webpack --mode production --config webpack.prod.config.js --env.PLATFORM=production --env.VERSION=stag --progress",
-    "test": "jest"
+    "build": "webpack --mode production",
+    "deploy": "gh-pages -d examples/dist",
+    "prepublishOnly": "npm run transpile",
+    "publish-demo": "npm run build && npm run deploy",
+    "start": "webpack-dev-server --mode development --open --display-error-details",
+    "test": "jest",
+    "transpile": "babel src -d dist --copy-files"
   },
   "keywords": [
     "react",
@@ -15,20 +19,17 @@
   ],
   "author": "crash <ccrsh@riseup.net>",
   "license": "MIT",
-  "dependencies": {
+  "peerDependencies": {
     "array.prototype.flat": "^1.2.1",
-    "axios": "^0.16.2",
     "bluebird": "^3.5.2",
-    "bootstrap": "^4.1.3",
-    "dotenv": "^6.1.0",
-    "express": "^4.16.4",
     "moment": "^2.22.2",
-    "react": "^15.6.1",
-    "react-big-calendar": "^0.14.4",
-    "react-dom": "^15.6.1"
+    "react": "^16.6.3",
+    "react-big-calendar": "^0.20.2",
+    "react-dom": "^16.6.3"
   },
   "devDependencies": {
-    "@babel/core": "^7.0.0",
+    "@babel/cli": "^7.0.0",
+    "@babel/core": "^7.2.0",
     "@babel/plugin-proposal-class-properties": "^7.0.0",
     "@babel/plugin-proposal-decorators": "^7.0.0",
     "@babel/plugin-proposal-export-namespace-from": "^7.0.0",
@@ -38,9 +39,12 @@
     "@babel/polyfill": "^7.0.0-beta.51",
     "@babel/preset-env": "^7.0.0-beta.51",
     "@babel/preset-react": "^7.0.0-beta.51",
-    "babel-loader": "^8.0.0-beta.0",
+    "babel-core": "^7.0.0-bridge.0",
+    "babel-loader": "^8.0.4",
     "babel-preset-react": "^6.24.1",
     "css-loader": "^0.28.11",
+    "gh-pages": "^2.0.1",
+    "html-loader": "^0.5.5",
     "html-webpack-plugin": "^3.2.0",
     "jest": "^23.6.0",
     "node-sass": "^4.9.4",
@@ -52,6 +56,9 @@
     "webpack-dev-middleware": "^1.12.2",
     "webpack-dev-server": "^3.1.0",
     "webpack-merge": "^4.1.4"
+  },
+  "resolutions": {
+    "babel-core": "7.0.0-bridge.0"
   },
   "repository": {
     "type": "git",
