@@ -13,8 +13,20 @@ const moment = require('moment')
    const end = e.end.date
      ? moment(e.start.date)
      : moment(e.end.dateTime)
-     
-   let reoccurringEvents = []
+
+   let reoccurringEvents = [
+     {
+       eventType: calendar.name,
+       creator: e.creator,
+       end: end._d,
+       gLink: e.htmlLink,
+       description: e.description,
+       location: e.location,
+       start: start._d,
+       title: e.summary,
+       meta: e
+     }
+   ]
    let add = 1
 
    while (recurrence > 0) {

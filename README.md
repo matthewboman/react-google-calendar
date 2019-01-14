@@ -42,6 +42,8 @@ It also allows for many kinds of reoccuring events, such as daily, weekly, and m
 
 * clone the repository `git clone https://github.com/crashspringfield/react-google-calendar.git`
 * `config.js` has a demo API for tests. Update config.js with your API key to access your calendar.
+* Download dependencies: `npm install`
+* Download peer dependencies: `npm i array.prototype.flat moment@^2.22.2 react@^16.6.3 react-big-calendar@^0.20.2 react-dom@^16.6.3 webpack`
 * Development build with hot reloading: `npm start`
 * Build for production: `npm run build`
 * Run tests: `npm test`

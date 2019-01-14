@@ -17,7 +17,7 @@ const handleDayOfMonth = (calendar, recurrence, e) => {
   const day = start.day()
   const date = start.date()
   let counter
-  
+
   if (date <= 7) {
     counter = 1
   } else if ((date >7) && (date <= 14)) {
@@ -30,7 +30,19 @@ const handleDayOfMonth = (calendar, recurrence, e) => {
     counter = 28
   }
 
-  let reoccurringEvents = []
+  let reoccurringEvents = [
+    {
+      eventType: calendar.name,
+      creator: e.creator,
+      end: end._d,
+      gLink: e.htmlLink,
+      description: e.description,
+      location: e.location,
+      start: start._d,
+      title: e.summary,
+      meta: e
+    }
+  ]
 
   while (recurrence > 0) {
     let tempCounter = counter

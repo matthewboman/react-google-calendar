@@ -1,6 +1,6 @@
 {
   "name": "react_google_calendar",
-  "version": "2.2.2",
+  "version": "2.2.3",
   "description": "An implementation of react-big-calendar populated by linked Google calendars",
   "main": "dist/index.js",
   "scripts": {
@@ -54,7 +54,7 @@
     "webpack": "^4.12.1",
     "webpack-cli": "^3.1.2",
     "webpack-dev-middleware": "^1.12.2",
-    "webpack-dev-server": "^3.1.0",
+    "webpack-dev-server": "^3.1.14",
     "webpack-merge": "^4.1.4"
   },
   "resolutions": {
