@@ -36,7 +36,7 @@ export default {
       .then(res => res.json())
       .then(res => {
         const items = res.items
-        const events = removeCancelled(items)
+        const { events, cancelled } = removeCancelled(items)
         const oneTimeEvents = oneTime(calendar, events)
         const recurringEvents = recurring(events)
 
@@ -45,7 +45,8 @@ export default {
           removeRecurrenceProperty(daily),
           handleDaily,
           calendar,
-          config.dailyRecurrence
+          config.dailyRecurrence,
+          cancelled
         ).flat()
 
         const weekly = filterByOneProperty("RRULE:FREQ=WEEKLY", recurringEvents)
@@ -53,7 +54,8 @@ export default {
           removeRecurrenceProperty(weekly),
           handleWeekly,
           calendar,
-          config.weeklyRecurrence
+          config.weeklyRecurrence,
+          cancelled
         ).flat()
 
         const monthly = filterByOneProperty("RRULE:FREQ=MONTHLY", recurringEvents)
@@ -69,13 +71,15 @@ export default {
           removeRecurrenceProperty(dateOfMonth),
           handleDateOfMonth,
           calendar,
-          config.monthlyRecurrence
+          config.monthlyRecurrence,
+          cancelled
         ).flat()
         const recurringDayOfMonth = recurringByProperty(
           removeRecurrenceProperty(dayOfMonth),
           handleDayOfMonth,
           calendar,
-          config.monthlyRecurrence
+          config.monthlyRecurrence,
+          cancelled
         ).flat()
 
         const allEvents = [].concat(

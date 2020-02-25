@@ -6,7 +6,7 @@ const moment = require('moment')
  */
 
 // handleDayOfMonth :: String -> Int -> {} -> [{}]
-const handleDayOfMonth = (calendar, recurrence, e) => {
+const handleDayOfMonth = (calendar, recurrence, e, cancelled) => {
   const start = e.start.date
     ? moment(e.start.date)
     : moment(e.start.dateTime)
@@ -30,19 +30,28 @@ const handleDayOfMonth = (calendar, recurrence, e) => {
     counter = 28
   }
 
-  let reoccurringEvents = [
-    {
-      eventType: calendar.name,
-      creator: e.creator,
-      end: end._d,
-      gLink: e.htmlLink,
-      description: e.description,
-      location: e.location,
-      start: start._d,
-      title: e.summary,
-      meta: e
-    }
-  ]
+    // check if first event is cancelled
+  let isCancelled = cancelled.find(item => (
+    item.recurringEventId === e.id && start.isSame(item.originalStartTime.dateTime)
+  ))
+
+  // add first event if not cancelled
+  let reoccurringEvents = [];
+  if (!isCancelled) {
+    reoccurringEvents.push(
+      {
+        eventType: calendar.name,
+        creator: e.creator,
+        end: end._d,
+        gLink: e.htmlLink,
+        description: e.description,
+        location: e.location,
+        start: start._d,
+        title: e.summary,
+        meta: e
+      }
+    )
+  }
 
   while (recurrence > 0) {
     let tempCounter = counter
@@ -54,20 +63,27 @@ const handleDayOfMonth = (calendar, recurrence, e) => {
       let isEqual = nextStart.getDay() == start.day()
 
       if (isEqual) {
-        const reoccurringEvent = {
-          eventType: calendar.name,
-          creator: e.creator,
-          end: nextEnd,
-          gLink: e.htmlLink,
-          description: e.description,
-          location: e.location,
-          start: nextStart,
-          title: e.summary,
-          meta: e
+        // check if next events cancelled
+        let isCancelled = cancelled.find(item => (
+          item.recurringEventId === e.id && moment(nextStart).isSame(item.originalStartTime.dateTime)
+        ))
+
+        if (!isCancelled) {
+          const reoccurringEvent = {
+            eventType: calendar.name,
+            creator: e.creator,
+            end: nextEnd,
+            gLink: e.htmlLink,
+            description: e.description,
+            location: e.location,
+            start: nextStart,
+            title: e.summary,
+            meta: e
+          }
+          reoccurringEvents.push(reoccurringEvent)
+          tempCounter = counter
+          break
         }
-        reoccurringEvents.push(reoccurringEvent)
-        tempCounter = counter
-        break
       }
 
       nextStart = new Date(start.year(), start.month() + recurrence, tempCounter, start.hour(), start.minutes())

@@ -38,11 +38,22 @@ const recurring = events => events.filter(item => item.recurrence)
   .map(event => ({ e: event, r: event.recurrence[0].split(';') }))
 
 // recurringByProperty :: [{}] -> Function -> String -> Int -> [{}]
-const recurringByProperty = (events, fn, calendar, occurences) => [].concat.apply([], events)
-  .map(event => fn(calendar, occurences, event))
+const recurringByProperty = (events, fn, calendar, occurences, cancelled) => [].concat.apply([], events)
+  .map(event => fn(calendar, occurences, event, cancelled))
 
 // removeCancelled :: [{}] -> [{}]
-const removeCancelled = events => events.filter(item => item.status != "cancelled")
+const removeCancelled = all => {
+  let events = []
+  let cancelled = []
+  for (let item of all) {
+    if (item.status === "cancelled") {
+      cancelled.push(item)
+    } else {
+      events.push(item)
+    }
+  }
+  return { events, cancelled }
+}
 
 // removeRecurrenceProperty :: [{}] -> [{}]
 const removeRecurrenceProperty = events => events.map(event => event.e)
