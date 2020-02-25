@@ -20,8 +20,16 @@ const handleDaily = (calendar, recurrence, e) => {
     : 1
   const n = wtfGoogle
   let add = wtfGoogle
-  let reoccurringEvents = [
-    {
+
+  // check if first event is cancelled
+  let isCancelled = cancelled.find(item => (
+      item.recurringEventId === e.id && start.isSame(item.originalStartTime.dateTime)
+  ));
+
+  // add first event if not cancelled
+  let reoccurringEvents = [];
+  if (!isCancelled) {
+    reoccurringEvents.push({
       eventType: calendar.name,
       creator: e.creator,
       end: end._d,
@@ -31,22 +39,29 @@ const handleDaily = (calendar, recurrence, e) => {
       start: start._d,
       title: e.summary,
       meta: e
-    }
-  ]
+    })
+  }
 
   while (recurrence > 0) {
-    const reoccurringEvent = {
-      eventType: calendar.name,
-      creator: e.creator,
-      end: end.clone().add(add, 'days')._d,
-      gLink: e.htmlLink,
-      description: e.description,
-      location: e.location,
-      start: start.clone().add(add, 'days')._d,
-      title: e.summary,
-      meta: e
+    // check if next events cancelled
+    let isCancelled = cancelled.find(item => (
+      item.recurringEventId === e.id && start.clone().add(add, "days").isSame(item.originalStartTime.dateTime)
+    ));
+
+    if (!isCancelled) {
+      const reoccurringEvent = {
+        eventType: calendar.name,
+        creator: e.creator,
+        end: end.clone().add(add, "days")._d,
+        gLink: e.htmlLink,
+        description: e.description,
+        location: e.location,
+        start: start.clone().add(add, "days")._d,
+        title: e.summary,
+        meta: e,
+      }
+      reoccurringEvents.push(reoccurringEvent)
     }
-    reoccurringEvents.push(reoccurringEvent)
     recurrence --
     add += n
   }

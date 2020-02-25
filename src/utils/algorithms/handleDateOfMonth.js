@@ -14,34 +14,48 @@ const moment = require('moment')
      ? moment(e.start.date)
      : moment(e.end.dateTime)
 
-   let reoccurringEvents = [
-     {
-       eventType: calendar.name,
-       creator: e.creator,
-       end: end._d,
-       gLink: e.htmlLink,
-       description: e.description,
-       location: e.location,
-       start: start._d,
-       title: e.summary,
-       meta: e
-     }
-   ]
+    // check if first event is cancelled
+    let isCancelled = cancelled.find(item => (
+        item.recurringEventId === e.id && start.isSame(item.originalStartTime.dateTime)
+    ))
+
+    // add first event if not cancelled
+    let reoccurringEvents = [];
+    if (!isCancelled) {
+      reoccurringEvents.push({
+        eventType: calendar.name,
+        creator: e.creator,
+        end: end._d,
+        gLink: e.htmlLink,
+        description: e.description,
+        location: e.location,
+        start: start._d,
+        title: e.summary,
+        meta: e,
+      })
+    }
+
    let add = 1
 
    while (recurrence > 0) {
-     const reoccurringEvent = {
-       eventType: calendar.name,
-       creator: e.creator,
-       end: end.clone().add(add, 'months')._d,
-       gLink: e.htmlLink,
-       description: e.description,
-       location: e.location,
-       start: start.clone().add(add, 'months')._d,
-       title: e.summary,
-       meta: e
-     }
-     reoccurringEvents.push(reoccurringEvent)
+    let isCancelled = cancelled.find(item => (
+      item.recurringEventId === e.id && start.clone().add(add, "months").isSame(item.originalStartTime.dateTime)
+    ))
+
+    if (!isCancelled) {
+      const reoccurringEvent = {
+        eventType: calendar.name,
+        creator: e.creator,
+        start: start.clone().add(add, "months")._d,
+        end: end.clone().add(add, "months")._d,
+        gLink: e.htmlLink,
+        description: e.description,
+        location: e.location,
+        title: e.summary,
+        meta: e,
+      }
+      reoccurringEvents.push(reoccurringEvent);
+    }
      recurrence --
      add ++
    }
